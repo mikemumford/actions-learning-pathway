@@ -1,20 +1,7 @@
-name: hello-world
+name: build-test-deploy
 on: push
 jobs: 
-  hello-world-job:
-    runs-on: ubuntu-latest
-    steps: 
-      - name: Check out repository code
-        uses: actions/checkout@v3
-      - run: echo "$(cat hello_world.txt)"
-      - name: use node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18.x'
-      - run: npm install
-      - run: npm run build 
-  test: 
-    needs: build
+  build:
     runs-on: ubuntu-latest
     steps: 
       - name: checkout repo
@@ -24,7 +11,8 @@ jobs:
         with:
           node-version: '18.x'
       - run: npm install
-      - run: npm test  test: 
+      - run: npm run build 
+  test: 
     needs: build
     runs-on: ubuntu-latest
     steps: 
